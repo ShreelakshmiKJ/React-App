@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useReducer } from "react";
 import { useState } from 'react';
 
 
@@ -15,20 +15,45 @@ export default function ExpenseContextProvider({children}){
         {id:"e4", title: 'New Bike', amount: 900.49, date: new Date(2024,2,13)}
       ]
 
-  const [expenses, setExpenses] = useState(DUMP_EXPENSES);
+  // const [expenses, setExpenses] = useState(DUMP_EXPENSES);
+  function expenseReducer(state, action){
+
+    const updatedExpenses = [...state] //array
+
+    if(action.type === 'ADD_EXPENSE'){
+      const expenseData = {
+        ...action.payload,
+        id : Math.random().toString()
+      }
+
+      updatedExpenses.push(expenseData);
+      return updatedExpenses;
+    }
+
+    if(action.type === 'REMOVE_EXPENSE') {
+
+    }
+
+    return updatedExpenses;
+  }
+
+  const [expenses, dispatch] = useReducer(expenseReducer, DUMP_EXPENSES)
 
   const addExpenseHandler = expense =>{
     // console.log('In App')
     // console.log(expense)
-    const expenseData = {
-      ...expense,
-      id : Math.random().toString()
-    }
-    setExpenses(
-      (prevExpenses) => { //call back fn
-        return [expenseData, ...prevExpenses] //add 1 record on top of existing array(...prevExpenses)
+    dispatch(
+      {
+        type: "ADD_EXPENSE",
+        payload: expense
       }
     )
+    
+    // setExpenses(
+    //   (prevExpenses) => { //call back fn
+    //     return [expenseData, ...prevExpenses] //add 1 record on top of existing array(...prevExpenses)
+    //   }
+    // )
   }
 
   const contextValue = {items : expenses, onSaveExpenseData : addExpenseHandler}
