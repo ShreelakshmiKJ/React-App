@@ -1,12 +1,13 @@
+import ExpenseForm from './ExpenseForm';
 import './NewExpense.css'
-import ExpenseForm from './ExpenseForm'
 
-const NewExpense = ({children}) =>{
+const NewExpense = ({children}) => {
 
-    return(
+   return (
         <div className='new-expense'>
-         {children}   
+            {children}
         </div>
     )
 }
+
 export default NewExpense;
