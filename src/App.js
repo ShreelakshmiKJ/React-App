@@ -4,6 +4,7 @@ import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpenses/NewExpense';
 import ExpenseForm from './components/NewExpenses/ExpenseForm';
 import ExpenseContextProvider, { ExpenseContext } from './store/expense-context';
+import ExampleComponent from './components/ExampleComponent';
 
 // function App() 
 const App = () => {
@@ -16,6 +17,9 @@ const App = () => {
       <ExpenseForm />
       </NewExpense>
        <Expenses />
+
+      <ExampleComponent></ExampleComponent>
+
     </div>
     </ExpenseContextProvider>
     
